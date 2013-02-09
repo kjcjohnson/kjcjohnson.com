@@ -26,9 +26,9 @@ TODO: cleanup code."
   (cl-who:with-html-output-to-string (s)
     (:html
      (:head
-      (:title "Heroku CL Example App"))
+      (:title "Keith Johnson"))
      (:body
-      (:h1 "Heroku CL Example App")
+      (:h1 "Keith Johnson")
       (:h3 "Using")
       (:ul
        (:li (format s "~A ~A" (lisp-implementation-type) (lisp-implementation-version)))
