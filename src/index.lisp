@@ -31,7 +31,7 @@ TODO: cleanup code."
     (:html
      (:head
       (:title "Keith Johnson")
-      (:link :rel "stylesheet" :href "/default-style.css"))
+      (:link :rel "stylesheet" :href "/public/default-style.css"))
      (:body
       (:div :id "wrapper"
       (:h1 "Keith Johnson" :id "title")
