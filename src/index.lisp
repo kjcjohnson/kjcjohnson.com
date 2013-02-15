@@ -24,14 +24,14 @@ TODO: cleanup code."
       (concatenate 'string (heroku-slug-dir) "/public/")) hunchentoot:*dispatch-table*)
 
 (push (hunchentoot:create-static-file-dispatcher-and-handler "/default-style.css" 
-      (concatenate 'string (heroku-slug-dir) "/public/default.css")) hunchentoot:*dispatch-table*)
+      (concatenate 'string (heroku-slug-dir) "/public/default-style.css")) hunchentoot:*dispatch-table*)
 
 (hunchentoot:define-easy-handler (hello-sbcl :uri "/") ()
   (cl-who:with-html-output-to-string (s)
     (:html
      (:head
       (:title "Keith Johnson")
-      (:link :rel "stylesheet" :href "/public/default-style.css"))
+      (:link :rel "stylesheet" :href "/static/default-style.css"))
      (:body
       (:div :id "wrapper"
       (:h1 "Keith Johnson" :id "title")
