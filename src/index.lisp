@@ -31,9 +31,10 @@ TODO: cleanup code."
     (:html
      (:head
       (:title "Keith Johnson")
-      (:link :rel "stylesheet" :href "/"))
+      (:link :rel "stylesheet" :href "/default-style.css"))
      (:body
-      (:h1 "Keith Johnson")
+      (:div :id "wrapper"
+      (:h1 "Keith Johnson" :id "title")
       (:h3 "Using")
       (:ul
        (:li (format s "~A ~A" (lisp-implementation-type) (lisp-implementation-version)))
@@ -47,4 +48,4 @@ TODO: cleanup code."
       (:div
        (:pre "SELECT version();"))
       (:div (format s "~A" (postmodern:with-connection (db-params)
-			     (postmodern:query "select version()"))))))))
+			     (postmodern:query "select version()")))))))))
