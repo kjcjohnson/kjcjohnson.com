@@ -7,5 +7,5 @@
   :components ((:file "package")
 	       (:module :src
 			:serial t      
-			:components ((:file "hello-world")))))
+			:components ((:file "index")))))
 
