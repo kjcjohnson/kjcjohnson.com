@@ -1,5 +1,7 @@
 (in-package :kjcjohnson-site)
 
+;;Look into wuwei
+
 ;; Utils
 (defun heroku-getenv (target)
   #+ccl (ccl:getenv target)
@@ -34,7 +36,7 @@ TODO: cleanup code."
       (:link :rel "stylesheet" :href "/static/default-style.css"))
      (:body
       (:div :id "wrapper"
-      (:h1 "Keith Johnson" :id "title")
+      (:h1 :id "title" "Keith Johnson")
       (:h3 "Using")
       (:ul
        (:li (format s "~A ~A" (lisp-implementation-type) (lisp-implementation-version)))
