@@ -44,22 +44,6 @@ TODO: cleanup code."
 		 (:li 
 		  (:a :href "/iraf" "IRAF Tools"))))))))
 
-;(hunchentoot:define-easy-handler (iraf :uri "/iraf") ()
-;  (cl-who:with-html-output-to-string (s)
-;    (:html
-;     (:head
-;      (:title "Keith Johnson's IRAF tools")
-;      (:link :rel "stylesheet" :href "/static/default-style.css"))
-;     (:body
-;      (:div :id "wrapper"
-;	    (:h1 :id "title" "Useful IRAF tools")
-;	    (:ul :class "nav"
-;		 (:li
-;		  (:a :href "/" "Home")))
-;	    (:p "These are a collection of bash install scripts that ease the process of installing IRAF, x11IRAF, and its dependencies. Note: run at your own risk.")
-;	    (:ul :class "irafitems"
-;		 (:li (:a :href "/iraf/install_iraf" "install_iraf") "Installs IRAF's dependencies")
-;		 (:li (:a :href "/iraf/install_x11iraf" "install_x11iraf") "Installs x11IRAF and ds9")))))))
 
 (defmacro create-typical-page (&key (title "Keith Johnson")
 			            head
@@ -73,15 +57,28 @@ TODO: cleanup code."
       (:link :rel "stylesheet" :href "/static/default-style.css")
       ,@head)
      (:body
-      (:div :id "header"
-	    ,@header)
       (:div :id "wrapper"
-	    ,@content)
-      (:div :id "navdiv"
-	   (:ul :class "nav"
-		(:li (:a :href "/" "Home"))))
-      (:div :id "footer"
-	    ,@footer)))))
+	    (:div :id "header"
+		  ,@header)
+	    (:div :id "content"
+		  ,@content)
+	    (:div :id "navdiv"
+		  (:ul :class "nav"
+		       (:li (:a :href "/" "Home"))))
+	    (:div :id "footer"
+		  (:hr :id "footer-top")
+		  ,@footer))))))
+
+(hunchentoot:define-easy-handler (index :uri "/") ()
+  (create-typical-page
+   :title "Keith Johnson"
+   :content ((:p "This website is mainly used for PaaS backend and other web-based endeavours. "
+		 "Additionally, I also use it for sharing interesting code and files. "
+		 "Currently, there are a set of convience scripts for installing IRAF on "
+		 "x86 linux machines available. Hopefully, this site will be populated with "
+		 "more front-end content soon."))
+   :footer ((:p "Made proudly with Common Lisp, SBCL, and Hunchentoot.")
+	    (:image :src "/static/lisplogo_alien.png"))))
 
 (hunchentoot:define-easy-handler (iraf :uri "/iraf") ()
   (create-typical-page 
@@ -90,5 +87,5 @@ TODO: cleanup code."
 		"the install process of IRAF and x11IRAF on x86 linux systems. "
 		"Note: Run at your own risk.")
 	     (:ul :class "irafitems"
-		  (:li (:a :href "/iraf/install_iraf" "install_iraf") ": Installs IRAF's dependencies")
-		  (:li (:a :href "/iraf/install_x11iraf" "install_x11iraf") ": Installs x11IRAF and ds9")))))
+		  (:li (:a :href "/iraf/files/install_iraf" "install_iraf") ": Installs IRAF's dependencies")
+		  (:li (:a :href "/iraf/files/install_x11iraf" "install_x11iraf") ": Installs x11IRAF and ds9")))))
