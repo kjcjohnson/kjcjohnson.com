@@ -41,8 +41,7 @@ TODO: cleanup code."
 			            head
 			            (header `((:h1 :id "header-title" ,title)))
 			            content
-			            footer
-			            menu)
+			            footer)
     		 
     `(cl-who:with-html-output-to-string (s)
        (:html
@@ -63,28 +62,26 @@ TODO: cleanup code."
 		     ,@content)
 	       (:div :id "footer"
 		     (:hr :id "footer-top")
-		     ,@footer))))))
+		     ,@footer
+		     (:p "Made proudly with Common Lisp, SBCL, and Hunchentoot.")
+		     (:image :src "/static/lisplogo_alien.png")))))))))
 
 
 (hunchentoot:define-easy-handler (index :uri "/") ()
 
   (create-typical-page
    :title "Keith Johnson"
-   :menu '(("his" . "hers"))
    :content ((:p "This website is mainly used for PaaS backend and other web-based endeavours. "
 		 "Additionally, I also use it for sharing interesting code and files. "
 		 "Currently, there are a set of convience scripts for installing IRAF on "
 		 "x86 linux machines available. Hopefully, this site will be populated with "
-		 "more front-end content soon."))
-   :footer ((:p "Made proudly with Common Lisp, SBCL, and Hunchentoot.")
-	    (:image :src "/static/lisplogo_alien.png"))))
+		 "more front-end content soon."))))
 
 
 (hunchentoot:define-easy-handler (iraf :uri "/iraf") ()
 
   (create-typical-page 
    :title "Keith's IRAF tools"
-   :menu '(("sierra" . "jill"))
    :content ((:p "These are a collection of bash install scripts that ease "
 		"the install process of IRAF and x11IRAF on x86 linux systems. "
 		"Note: Run at your own risk.")
