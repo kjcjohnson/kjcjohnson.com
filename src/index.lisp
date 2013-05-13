@@ -36,6 +36,7 @@ TODO: cleanup code."
 (defparameter kjcjohnson-site::*menu-items* nil)
 (push '( "/iraf" . "IRAF Tools") kjcjohnson-site::*menu-items*)
 (push '( "/" . "Home" ) kjcjohnson-site::*menu-items*)
+(push '( "/blank" . "Blank Page" ) kjcjohnson-site::*menu-items*)
 
 (defmacro create-typical-page (&key (title "Keith Johnson")
 			            head
@@ -88,3 +89,9 @@ TODO: cleanup code."
 	     (:ul :class "irafitems"
 		  (:li (:a :href "/iraf/files/install_iraf" "install_iraf") ": Installs IRAF's dependencies")
 		  (:li (:a :href "/iraf/files/install_x11iraf" "install_x11iraf") ": Installs x11IRAF and ds9")))))
+
+(hunchentoot:define-easy-handler (blank-page :uri "/blank") ()
+
+  (create-typical-page
+   :title ""
+   :content ((:p))))
