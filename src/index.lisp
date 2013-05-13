@@ -31,7 +31,7 @@ TODO: cleanup code."
 (push (hunchentoot:create-folder-dispatcher-and-handler "/iraf"
       (concatenate 'string (heroku-slug-dir) "public/iraf/")) hunchentoot:*dispatch-table*)
 
-(hunchentoot:define-easy-handler (hello-sbcl :uri "/") ()
+(hunchentoot:define-easy-handler (index :uri "/") ()
   (cl-who:with-html-output-to-string (s)
     (:html
      (:head
@@ -40,11 +40,6 @@ TODO: cleanup code."
      (:body
       (:div :id "wrapper"
       (:h1 :id "title" "Keith Johnson")
-      (:h3 "Using")
-      (:ul
-       (:li (format s "~A ~A" (lisp-implementation-type) (lisp-implementation-version)))
-       (:li (format s "Hunchentoot ~A" hunchentoot::*hunchentoot-version*))
-       (:li (format s "CL-WHO")))
       (:div
        (:a :href "static/lisp-glossy.jpg" (:img :src "static/lisp-glossy.jpg" :width 100)))
       (:div
