@@ -66,7 +66,7 @@ TODO: cleanup code."
 		     ,@header)
 	       (:div :id "navdiv"
 		     (:ul :class "nav"
-			  ,@menuitems)
+			  ,@menuitems))
 	       
 	       (:div :id "content"
 		     ,@content)
