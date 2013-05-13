@@ -85,7 +85,7 @@ TODO: cleanup code."
 	    (:image :src "/static/lisplogo_alien.png"))))
 
 (hunchentoot:define-easy-handler (iraf :uri "/iraf") ()
-  (push '( "/iraf" . "IRAF Tools"))
+  (push '( "/iraf" . "IRAF Tools") *menu-items*)
   (create-typical-page 
    :title "Keith's IRAF tools"
    :content ((:p "These are a collection of bash install scripts that ease "
