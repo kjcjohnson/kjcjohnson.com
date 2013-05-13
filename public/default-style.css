@@ -33,13 +33,13 @@ body {
 
     background-image: url("paper_fibers.png");
     background-repeat: repeat;
-    height: 100%
 
 }
 
 #footer {
 
     font-size: 60%;
+    float: left;
     
 
 }
@@ -50,7 +50,7 @@ body {
     margin-top: 10px;
     width: 800px;
     background-color: #FFFFBB;
-    min-heigth: 100%;
+    min-heigth: 90%;
 
 }
 
