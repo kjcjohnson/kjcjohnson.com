@@ -42,9 +42,9 @@ TODO: cleanup code."
 	    (:h1 :id "title" "Keith Johnson")
 	    (:ul :class "nav"
 		 (:li 
-		  (:a :href "/iraf/" "IRAF Tools"))))))))
+		  (:a :href "/iraf/#" "IRAF Tools"))))))))
 
-(hunchentoot:define-easy-handler (iraf-page :uri "/iraf/") ()
+(hunchentoot:define-easy-handler (iraf :uri "/iraf/#") ()
   (cl-who:with-html-output-to-string (s)
     (:html
      (:head
@@ -56,8 +56,7 @@ TODO: cleanup code."
 	    (:ul :class "nav"
 		 (:li
 		  (:a :href "/" "Home")))
-	    (:p "These are a collection of bash install scripts that ease the process of 
-installing IRAF, x11IRAF, and its dependencies. Note: run at your own risk.")
+	    (:p "These are a collection of bash install scripts that ease the process of installing IRAF, x11IRAF, and its dependencies. Note: run at your own risk.")
 	    (:ul :class "irafitems"
 		 (:li (:a :href "/iraf/install_iraf" "install_iraf") "Installs IRAF's dependencies")
 		 (:li (:a :href "/iraf/install_x11iraf" "install_x11iraf") "Installs x11IRAF and ds9")))))))
