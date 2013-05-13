@@ -33,16 +33,17 @@ TODO: cleanup code."
 
 
 
-(defparameter *menu-items* nil)
+(defparameter kjcjohnson-site::*menu-items* nil)
+(push '( "/iraf" . "IRAF Tools") kjcjohnson-site::*menu-items*)
+(push '( "/" . "Home" ) kjcjohnson-site::*menu-items*)
 
 (defmacro create-typical-page (&key (title "Keith Johnson")
 			            head
 			            (header `((:h1 :id "header-title" ,title)))
 			            content
-			            footer)
- 
-  (let* ((menuitems (loop for (place . name) in kjcjohnson-site::*menu-items* collecting
-			 `(:li (:a :href ,place ,name)))))		 
+			            footer
+			            menu)
+    		 
     `(cl-who:with-html-output-to-string (s)
        (:html
 	(:head
@@ -55,19 +56,21 @@ TODO: cleanup code."
 		     ,@header)
 	       (:div :id "navdiv"
 		     (:ul :class "nav"
-			  ,@menuitems))
+			 (loop for ( place .  name ) in *menu-items* doing
+			      (cl-who:htm (:li (:a :href place (cl-who:str name)))))))
 	       
 	       (:div :id "content"
 		     ,@content)
 	       (:div :id "footer"
 		     (:hr :id "footer-top")
-		     ,@footer)))))))
+		     ,@footer))))))
 
-(push '( "/" . "Home" ) *menu-items*)
+
 (hunchentoot:define-easy-handler (index :uri "/") ()
 
   (create-typical-page
    :title "Keith Johnson"
+   :menu '(("his" . "hers"))
    :content ((:p "This website is mainly used for PaaS backend and other web-based endeavours. "
 		 "Additionally, I also use it for sharing interesting code and files. "
 		 "Currently, there are a set of convience scripts for installing IRAF on "
@@ -76,11 +79,12 @@ TODO: cleanup code."
    :footer ((:p "Made proudly with Common Lisp, SBCL, and Hunchentoot.")
 	    (:image :src "/static/lisplogo_alien.png"))))
 
-(push '( "/iraf" . "IRAF Tools") *menu-items*)
+
 (hunchentoot:define-easy-handler (iraf :uri "/iraf") ()
 
   (create-typical-page 
    :title "Keith's IRAF tools"
+   :menu '(("sierra" . "jill"))
    :content ((:p "These are a collection of bash install scripts that ease "
 		"the install process of IRAF and x11IRAF on x86 linux systems. "
 		"Note: Run at your own risk.")

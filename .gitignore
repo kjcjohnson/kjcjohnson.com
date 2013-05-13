@@ -1,0 +1,4 @@
+# we want to ignore .fasl files and temp files.#
+################################################
+*.fasl
+*.*~
