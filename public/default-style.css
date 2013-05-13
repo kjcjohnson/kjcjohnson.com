@@ -40,6 +40,7 @@ body {
 
     font-size: 60%;
     float: left;
+    height: 80px;
     
 
 }
@@ -50,7 +51,7 @@ body {
     margin-top: 10px;
     width: 800px;
     background-color: #FFFFBB;
-    min-heigth: 90%;
+    
 
 }
 
@@ -68,5 +69,12 @@ hr {
 
     border: solid;
     border-width: 2px;
+
+}
+
+#footer img {
+
+    float: right;
+    padding: 2px;
 
 }
