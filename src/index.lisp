@@ -29,7 +29,7 @@ TODO: cleanup code."
       (concatenate 'string (heroku-slug-dir) "/public/default-style.css")) hunchentoot:*dispatch-table*)
 
 (push (hunchentoot:create-folder-dispatcher-and-handler "/iraf/files/"
-      (concatenate 'string (heroku-slug-dir) "public/iraf/")) hunchentoot:*dispatch-table*)
+      (concatenate 'string (heroku-slug-dir) "/public/iraf/")) hunchentoot:*dispatch-table*)
 
 (hunchentoot:define-easy-handler (index :uri "/") ()
   (cl-who:with-html-output-to-string (s)
@@ -63,8 +63,9 @@ TODO: cleanup code."
 		  ,@header)
 	    (:div :id "navdiv"
 		  (:ul :class "nav"
-		       ,@(loop for (place . name) in *menu-items* collecting
-			    `(:li (:a :href ,place ,name)))))
+		       (loop for (place . name) in *menu-items* doing
+		          (:li (:a :href ,place ,name)))))
+		       
 	    (:div :id "content"
 		  ,@content)
 	    (:div :id "footer"
