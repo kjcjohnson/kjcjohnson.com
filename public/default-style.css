@@ -61,3 +61,10 @@ body {
     height: 80%;
 
 }
+
+hr {
+
+    border: solid;
+    border-width: 2px;
+
+}

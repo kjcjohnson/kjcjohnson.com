@@ -64,7 +64,7 @@ TODO: cleanup code."
 		     (:hr :id "footer-top")
 		     ,@footer
 		     (:p "Made proudly with Common Lisp, SBCL, and Hunchentoot.")
-		     (:image :src "/static/lisplogo_alien.png")))))))))
+		     (:image :src "/static/lisplogo_alien.png")))))))
 
 
 (hunchentoot:define-easy-handler (index :uri "/") ()
