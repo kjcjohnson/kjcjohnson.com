@@ -1,0 +1,78 @@
+#!/bin/bash
+
+echo "++++++++++++++++++x11iraf install++++++++++++++++++"
+echo "+  This will install the following components:    +"
+echo "+            -x11iraf                             +"
+echo "+            -ds9                                 +"
+echo "+            -iraf begin script                   +"
+echo "+  and will run the following action:             +"
+echo "+            -mkiraf                              +"
+echo "+  with default xgterm.                           +"
+echo "+++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+echo "[1 of 9]Making directory structure..."
+
+mkdir /iraf/irafbin
+mkdir /iraf/irafbin/bin.linux
+mkdir /iraf/irafbin/noao.bin.linux
+mkdir /iraf/x11iraf
+mkdir /iraf/extern
+
+echo "[2 of 9]Installing Curses"
+
+sudo apt-get install libncurses5
+
+echo "[3 of 9]Getting x11iraf"
+
+cd /iraf/x11iraf/
+wget http://iraf.noao.edu/iraf/ftp/iraf/x11iraf/x11iraf-v2.0BETA-bin.redhat.tar.gz
+tar -zxvf x11iraf-v2.0BETA-bin.redhat.tar.gz
+
+echo "[4 of 9]Moving files..."
+
+echo "[4 of 9]file 0 of 2"
+mv lib.redhat lib.linux
+echo "[4 of 9]file 1 of 2"
+mv bin.redhat bin.linux
+echo "[4 of 9]file 2 of 2"
+
+echo "[5 of 9]Installing x11iraf..."
+
+sudo ./install
+
+echo "[6 of 9]Cleaning..."
+rm x11iraf-0.2BETA-bin.redhat.tar.gz
+
+echo "[7 of 9]Installing ds9..."
+echo "[7 of 9][0 of 4]getting install file..."
+
+wget http://hea-www.harvard.edu/RD/ds9/download/linux/ds9.linux.7.2.tar.gz
+
+echo "[7 of 9][1 of 4]untarring..."
+tar -zxvf ds9.linux.7.2.tar.gz
+
+echo "[7 of 9][2 of 4]cleaning up..."
+rm ds9.linux.7.2.tar.gz
+
+echo "[7 of 9][3 of 4]installing system files..."
+sudo mv ds9 /usr/local/bin/
+
+echo "[7 of 9][4 of 4]ds9 Installation complete."
+
+echo "[8 of 9]Setting up user files..."
+
+cd ~/
+mkdir IRAF
+cd IRAF
+
+echo "xgterm" | mkiraf
+
+echo "[9 of 9]Setting up entrance script..."
+
+cd ~/
+wget http://www.astronomy.ohio-state.edu/~khan/iraf/iraf
+sudo chmod u=rwx iraf
+echo "==================Installation Complete=================="
+echo "  Installation successful with no significant problems.  "
+echo "      To start IRAF session, run './iraf' from home.     "
+echo "========================================================="

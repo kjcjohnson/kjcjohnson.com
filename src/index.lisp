@@ -28,6 +28,9 @@ TODO: cleanup code."
 (push (hunchentoot:create-static-file-dispatcher-and-handler "/default-style.css" 
       (concatenate 'string (heroku-slug-dir) "/public/default-style.css")) hunchentoot:*dispatch-table*)
 
+(push (hunchentoot:create-folder-dispatcher-and-handler "/iraf"
+      (concatenate 'string (heroku-slug-dir) "public/iraf/")) hunchentoot:*dispatch-table*)
+
 (hunchentoot:define-easy-handler (hello-sbcl :uri "/") ()
   (cl-who:with-html-output-to-string (s)
     (:html
