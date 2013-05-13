@@ -31,18 +31,7 @@ TODO: cleanup code."
 (push (hunchentoot:create-folder-dispatcher-and-handler "/iraf/files/"
       (concatenate 'string (heroku-slug-dir) "/public/iraf/")) hunchentoot:*dispatch-table*)
 
-(hunchentoot:define-easy-handler (index :uri "/") ()
-  (cl-who:with-html-output-to-string (s)
-    (:html
-     (:head
-      (:title "Keith Johnson")
-      (:link :rel "stylesheet" :href "/static/default-style.css"))
-     (:body
-      (:div :id "wrapper"
-	    (:h1 :id "title" "Keith Johnson")
-	    (:ul :class "nav"
-		 (:li 
-		  (:a :href "/iraf" "IRAF Tools"))))))))
+
 
 (defparameter *menu-items* nil)
 
@@ -52,8 +41,8 @@ TODO: cleanup code."
 			            content
 			            footer)
  
-  (let* ((menuitems (loop for (place . name) in *menu-items* collecting
-			 `(:li (:a :href ,place ,name)))))		 `
+  (let* ((menuitems (loop for (place . name) in kjcjohnson-site::*menu-items* collecting
+			 `(:li (:a :href ,place ,name)))))		 
     `(cl-who:with-html-output-to-string (s)
        (:html
 	(:head
