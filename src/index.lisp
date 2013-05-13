@@ -44,19 +44,51 @@ TODO: cleanup code."
 		 (:li 
 		  (:a :href "/iraf" "IRAF Tools"))))))))
 
-(hunchentoot:define-easy-handler (iraf :uri "/iraf") ()
-  (cl-who:with-html-output-to-string (s)
+;(hunchentoot:define-easy-handler (iraf :uri "/iraf") ()
+;  (cl-who:with-html-output-to-string (s)
+;    (:html
+;     (:head
+;      (:title "Keith Johnson's IRAF tools")
+;      (:link :rel "stylesheet" :href "/static/default-style.css"))
+;     (:body
+;      (:div :id "wrapper"
+;	    (:h1 :id "title" "Useful IRAF tools")
+;	    (:ul :class "nav"
+;		 (:li
+;		  (:a :href "/" "Home")))
+;	    (:p "These are a collection of bash install scripts that ease the process of installing IRAF, x11IRAF, and its dependencies. Note: run at your own risk.")
+;	    (:ul :class "irafitems"
+;		 (:li (:a :href "/iraf/install_iraf" "install_iraf") "Installs IRAF's dependencies")
+;		 (:li (:a :href "/iraf/install_x11iraf" "install_x11iraf") "Installs x11IRAF and ds9")))))))
+
+(defmacro create-typical-page (&key (title "Keith Johnson")
+			            head
+			            (header `((:h1 :id "header-title" ,title)))
+			            content
+			            footer)
+  `(cl-who:with-html-output-to-string (s)
     (:html
      (:head
-      (:title "Keith Johnson's IRAF tools")
-      (:link :rel "stylesheet" :href "/static/default-style.css"))
+      (:title ,title)
+      (:link :rel "stylesheet" :href "/static/default-style.css")
+      ,@head)
      (:body
+      (:div :id "header"
+	    ,@header)
       (:div :id "wrapper"
-	    (:h1 :id "title" "Useful IRAF tools")
-	    (:ul :class "nav"
-		 (:li
-		  (:a :href "/" "Home")))
-	    (:p "These are a collection of bash install scripts that ease the process of installing IRAF, x11IRAF, and its dependencies. Note: run at your own risk.")
-	    (:ul :class "irafitems"
-		 (:li (:a :href "/iraf/install_iraf" "install_iraf") "Installs IRAF's dependencies")
-		 (:li (:a :href "/iraf/install_x11iraf" "install_x11iraf") "Installs x11IRAF and ds9")))))))
+	    ,@content)
+      (:div :id "navdiv"
+	   (:ul :class "nav"
+		(:li (:a :href "/" "Home"))))
+      (:div :id "footer"
+	    ,@footer)))))
+
+(hunchentoot:define-easy-handler (iraf :uri "/iraf") ()
+  (create-typical-page 
+   :title "Keith's IRAF tools"
+   :content ((:p "These are a collection of bash install scripts that ease "
+		"the install process of IRAF and x11IRAF on x86 linux systems. "
+		"Note: Run at your own risk.")
+	     (:ul :class "irafitems"
+		  (:li (:a :href "/iraf/install_iraf" "install_iraf") ": Installs IRAF's dependencies")
+		  (:li (:a :href "/iraf/install_x11iraf" "install_x11iraf") ": Installs x11IRAF and ds9")))))
