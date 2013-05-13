@@ -42,9 +42,9 @@ TODO: cleanup code."
 	    (:h1 :id "title" "Keith Johnson")
 	    (:ul :class "nav"
 		 (:li 
-		  (:a :href "/iraf/#" "IRAF Tools"))))))))
+		  (:a :href "/iraf" "IRAF Tools"))))))))
 
-(hunchentoot:define-easy-handler (iraf :uri "/iraf/#") ()
+(hunchentoot:define-easy-handler (iraf :uri "/iraf") ()
   (cl-who:with-html-output-to-string (s)
     (:html
      (:head
