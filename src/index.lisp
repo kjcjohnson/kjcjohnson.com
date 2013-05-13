@@ -64,7 +64,7 @@ TODO: cleanup code."
 	    (:div :id "navdiv"
 		  (:ul :class "nav"
 		       (loop for (place . name) in *menu-items* doing
-		          (:li (:a :href ,place ,name)))))
+		          (:li (:a :href place name)))))
 		       
 	    (:div :id "content"
 		  ,@content)
