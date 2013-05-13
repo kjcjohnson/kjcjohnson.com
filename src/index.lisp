@@ -44,6 +44,7 @@ TODO: cleanup code."
 		 (:li 
 		  (:a :href "/iraf" "IRAF Tools"))))))))
 
+(defparameter *menu-items* nil)
 
 (defmacro create-typical-page (&key (title "Keith Johnson")
 			            head
@@ -60,16 +61,18 @@ TODO: cleanup code."
       (:div :id "wrapper"
 	    (:div :id "header"
 		  ,@header)
-	    (:div :id "content"
-		  ,@content)
 	    (:div :id "navdiv"
 		  (:ul :class "nav"
-		       (:li (:a :href "/" "Home"))))
+		       ,@(loop for (place . name) in *menu-items* collecting
+			    `(:li (:a :href ,place ,name)))))
+	    (:div :id "content"
+		  ,@content)
 	    (:div :id "footer"
 		  (:hr :id "footer-top")
 		  ,@footer))))))
 
 (hunchentoot:define-easy-handler (index :uri "/") ()
+  (push '( "/" . "Home" ) *menu-items*)
   (create-typical-page
    :title "Keith Johnson"
    :content ((:p "This website is mainly used for PaaS backend and other web-based endeavours. "
@@ -81,6 +84,7 @@ TODO: cleanup code."
 	    (:image :src "/static/lisplogo_alien.png"))))
 
 (hunchentoot:define-easy-handler (iraf :uri "/iraf") ()
+  (push '( "/iraf" . "IRAF Tools"))
   (create-typical-page 
    :title "Keith's IRAF tools"
    :content ((:p "These are a collection of bash install scripts that ease "
