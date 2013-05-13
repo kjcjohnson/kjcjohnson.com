@@ -7,6 +7,27 @@
 
 }
 
+ul.nav {
+
+    float: left;
+    border-width: 2px;
+    background-color: #FFFF88;
+    list-style-type: none; 
+
+}
+
+h1#title {
+
+   font-family: serif;
+
+}
+
+li {
+
+    
+
+}
+
 body {
 
     background-image: url("paper_fibers.png");
@@ -18,6 +39,6 @@ body {
     
     margin: 0 auto;
     width: 800px;
-    background-color: #AAF;
+    background-color: #FFFFBB;
 
 }
