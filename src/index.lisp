@@ -31,6 +31,8 @@ TODO: cleanup code."
 (push (hunchentoot:create-folder-dispatcher-and-handler "/iraf/files/"
       (concatenate 'string (heroku-slug-dir) "/public/iraf/")) hunchentoot:*dispatch-table*)
 
+(push (hunchentoot:create-folder-dispatcher-and-handler "/461data/"
+      (concatenate 'string (heroku-slug-dir) "/public/461data/")) hunchentoot:*dispatch-table*)
 
 
 (defparameter kjcjohnson-site::*menu-items* nil)
@@ -95,3 +97,12 @@ TODO: cleanup code."
   (create-typical-page
    :title ""
    :content ((:p))))
+
+(hunchentoot:define-easy-handler (spec-data :uri "/specdata") ()
+
+  (create-typical-page
+   :title "Astro 461 Spectroscopy Data"
+   :content ((:p "Here are the files from the three nights, in .zip archives.")
+	     (:ul (:li (:a :href "/461data/may10.zip" "May 10"))
+		  (:li (:a :href "/461data/may11.zip" "May 11"))
+		  (:li (:a :href "/461data/may12.zip" "May 12"))))))
