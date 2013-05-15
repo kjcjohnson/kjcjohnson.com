@@ -142,5 +142,5 @@ TODO: cleanup code."
 
 (hunchentoot:define-easy-handler (repl-process :uri "/repl/process") (sexp)
 
-  (eval (read sexp)))
+  (eval (read-from-string sexp)))
 	      
