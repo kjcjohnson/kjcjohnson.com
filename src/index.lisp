@@ -147,4 +147,4 @@ TODO: cleanup code."
   (if (string= sexp "") (format nil "Null String")
       (handler-case 
 	  (format nil (eval (read-from-string sexp)))
-	(t () (format nil "ERROR! in (format (eval (read)))")))))
+	(t (e) (format nil "ERROR! in (format (eval (read))): ~a" e)))))
