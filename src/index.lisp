@@ -119,7 +119,8 @@ TODO: cleanup code."
 
   (create-typical-page
    :jquery t
-   :header (:script "function processREPL() {
+   :title "REPL for kjcjohnson.com"
+   :header ((:script "function processREPL() {
 
                          $.post( '/repl/process',
                                  {sexp:$('#REPL').text()},
@@ -129,7 +130,8 @@ TODO: cleanup code."
                                  });
 
                      };")
-   :title "REPL for kjcjohnson.com"
+	    (:link :rel "stylesheet" :href "/static/REPL.css"))
+   
    :content ((:p "Use this lisp REPL to change the website in real time!")
 	     (:form
 	      (:textarea :id "REPLHistory")
@@ -142,5 +144,5 @@ TODO: cleanup code."
 
 (hunchentoot:define-easy-handler (repl-process :uri "/repl/process") (sexp)
 
-  (eval (read-from-string sexp)))
+  (format nil (eval (read-from-string sexp))))
 	      
