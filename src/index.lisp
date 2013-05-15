@@ -58,8 +58,8 @@ TODO: cleanup code."
 		     ,@header)
 	       (:div :id "navdiv"
 		     (:ul :class "nav"
-			 (loop for ( place .  name ) in *menu-items* doing
-			      (cl-who:htm (:li (:a :href place (cl-who:str name)))))))
+			 (mapcar #'funcall (reverse  (loop for ( place .  name ) in *menu-items* collecting
+			      (lambda () (cl-who:htm (:li (:a :href place (cl-who:str name))))))))))
 	       
 	       (:div :id "content"
 		     ,@content)

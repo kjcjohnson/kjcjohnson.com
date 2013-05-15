@@ -7,9 +7,18 @@
 
 }
 
+#header {
+
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #FFFFBB;
+
+}
+
 ul.nav {
 
-    float: left;
+    /*float: left;*/
     border: solid;
     border-width: 2px;
     background-color: #FFFF88;
@@ -41,9 +50,9 @@ body {
 #footer {
 
     font-size: 70%;
-    float: left;
+    /*float: left;*/
     height: 80px;
-    width: 800px;
+    
     
 
 }
@@ -52,8 +61,7 @@ body {
     
     margin: 0 auto;
     margin-top: 10px;
-    width: 800px;
-    background-color: #FFFFBB;
+    width: 960px;
     padding: 10px;
 
 }
@@ -63,7 +71,7 @@ body {
     margin: 5px;
     padding-right: 10px;
     padding-left: 10px;
-    float: right;
+    /*float: right;*/
     height: 70%;
 
 }
