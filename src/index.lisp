@@ -120,13 +120,13 @@ TODO: cleanup code."
   (create-typical-page
    :jquery t
    :title "REPL for kjcjohnson.com"
-   :header ((:script "function processREPL() {
+   :head ((:script "function processREPL() {
 
                          $.post( '/repl/process',
-                                 {sexp:$('#REPL').text()},
+                                 {sexp:$('#REPL').value()},
                                  function( data, status ) {
-                                   text = $('#REPLHistory').text()
-                                   $('#REPLHistory').text() = text + data
+                                   text = $('#REPLHistory').val()
+                                   $('#REPLHistory').val(text + data)
                                  });
 
                      };")
@@ -144,5 +144,7 @@ TODO: cleanup code."
 
 (hunchentoot:define-easy-handler (repl-process :uri "/repl/process") (sexp)
 
-  (format nil (eval (read-from-string sexp))))
-	      
+  (if (string= sexp "") (format nil "Null String")
+      (handler-case 
+	  (format nil (eval (read-from-string sexp)))
+	(t () (format nil "ERROR! in (format (eval (read)))")))))
