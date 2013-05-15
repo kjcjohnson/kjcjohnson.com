@@ -57,7 +57,7 @@ TODO: cleanup code."
        (:html
 	(:head
 	 ,(if jquery
-	     (:script :src "http://code.jquery.com/jquery-1.9.1.js"))
+	    `(:script :src "http://code.jquery.com/jquery-1.9.1.js"))
 	 (:title ,title)
 	 (:link :rel "stylesheet" :href "/static/default-style.css")
 	 ,@head)
