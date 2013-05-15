@@ -27,7 +27,7 @@ ul.nav {
 
 h1#title {
 
-   font-family: serif;
+   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 
 }
 
@@ -76,6 +76,7 @@ body {
 a {
 
     text-decoration: none;
+    color: #000000;
 
 }
 
