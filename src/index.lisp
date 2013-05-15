@@ -36,19 +36,28 @@ TODO: cleanup code."
 
 
 (defparameter kjcjohnson-site::*menu-items* nil)
-(push '( "/iraf" . "IRAF Tools") kjcjohnson-site::*menu-items*)
-(push '( "/" . "Home" ) kjcjohnson-site::*menu-items*)
-(push '( "/blank" . "Blank Page" ) kjcjohnson-site::*menu-items*)
+
+(defun add-menu-item (location name)
+  (let ((revmenu (nreverse kjcjohnson-site::*menu-items*)))
+    (push (cons location name) revmenu)
+    (setf kjcjohnson-site::*menu-items* revmenu)))
+
+(add-menu-item "/" "Home" )
+(add-menu-item "/blank" "Blank Page" )
+(add-menu-item "/iraf" "IRAF Tools" )
 
 (defmacro create-typical-page (&key (title "Keith Johnson")
 			            head
 			            (header `((:h1 :id "header-title" ,title)))
 			            content
-			            footer)
+			            footer
+			            (jquery nil))
     		 
     `(cl-who:with-html-output-to-string (s)
        (:html
 	(:head
+	 ,(if jquery
+	     (:script :src "http://code.jquery.com/jquery-1.9.1.js"))
 	 (:title ,title)
 	 (:link :rel "stylesheet" :href "/static/default-style.css")
 	 ,@head)
@@ -58,7 +67,7 @@ TODO: cleanup code."
 		     ,@header)
 	       (:div :id "navdiv"
 		     (:ul :class "nav"
-			 (loop for ( place .  name ) in (nreverse *menu-items*) doing
+			 (loop for ( place .  name ) in *menu-items* doing
 			      (cl-who:htm (:li (:a :href place (cl-who:str name)))))))
 	       
 	       (:div :id "content"
@@ -95,7 +104,6 @@ TODO: cleanup code."
 (hunchentoot:define-easy-handler (blank-page :uri "/blank") ()
 
   (create-typical-page
-   :title ""
    :content ((:p))))
 
 (hunchentoot:define-easy-handler (spec-data :uri "/specdata") ()
@@ -106,3 +114,33 @@ TODO: cleanup code."
 	     (:ul (:li (:a :href "/461data/may10.zip" "May 10"))
 		  (:li (:a :href "/461data/may11.zip" "May 11"))
 		  (:li (:a :href "/461data/may12.zip" "May 12"))))))
+
+(hunchentoot:define-easy-handler (repl-form :uri "/repl") ()
+
+  (create-typical-page
+   :jquery t
+   :header (:script "function processREPL() {
+
+                         $.post( '/repl/process',
+                                 {sexp:$('#REPL').text()},
+                                 function( data, status ) {
+                                   text = $('#REPLHistory').text()
+                                   $('#REPLHistory').text() = text + data
+                                 });
+
+                     };")
+   :title "REPL for kjcjohnson.com"
+   :content ((:p "Use this lisp REPL to change the website in real time!")
+	     (:form
+	      (:textarea :id "REPLHistory")
+	      (:input :id "REPL")
+	      (:script "$('#REPL').on('keydown', 
+                          function(e){ 
+                            if (e.which==13) {
+                              processREPL();
+                            }});" )))))
+
+(hunchentoot:define-easy-handler (repl-process :uri "/repl/process") (sexp)
+
+  (eval (read sexp)))
+	      
