@@ -1,5 +1,7 @@
 (in-package :kjcjohnson-site)
 
+(asdf:oos 'asdf:load-op :ht-simple-ajax)
+
 ;;Look into wuwei
 
 ;; Utils
@@ -115,6 +117,15 @@ TODO: cleanup code."
 		  (:li (:a :href "/461data/may11.zip" "May 11"))
 		  (:li (:a :href "/461data/may12.zip" "May 12"))))))
 
+
+(defparameter *ajax-processor*
+  (make-instance 'ht-simple-ajax:ajax-processor :server-uri "/repl/process"))
+
+(ht-simple-ajax:defun-ajax repl-response (sexp) (*ajax-processor*)
+  (format nil "~a" (eval (read-from-string sexp))))
+
+(push (ht-simple-ajax:create-ajax-dispatcher *ajax-processor*) hunchentoot:*dispatch-table*) 
+
 (hunchentoot:define-easy-handler (repl-form :uri "/repl") ()
 
   (create-typical-page
@@ -122,15 +133,15 @@ TODO: cleanup code."
    :title "REPL for kjcjohnson.com"
    :head ((:script "function processREPL() {
 
-                         $.post( '/repl/process',
-                                 {sexp:$('#REPL').value()},
-                                 function( data, status ) {
+                         ajax_repl_response( $('#REPL').val(),
+                                 function( respn ) {
                                    text = $('#REPLHistory').val()
-                                   $('#REPLHistory').val(text + data)
+                                   $('#REPLHistory').val(text + respn)
                                  });
 
                      };")
-	    (:link :rel "stylesheet" :href "/static/REPL.css"))
+	  (cl-who:str (format nil "~a" (ht-simple-ajax:generate-prologue *ajax-processor*)))
+	  (:link :rel "stylesheet" :href "/static/REPL.css"))
    
    :content ((:p "Use this lisp REPL to change the website in real time!")
 	     (:form
@@ -141,10 +152,3 @@ TODO: cleanup code."
                             if (e.which==13) {
                               processREPL();
                             }});" )))))
-
-(hunchentoot:define-easy-handler (repl-process :uri "/repl/process") (sexp)
-
-  (if (string= sexp "") (format nil "Null String")
-      (handler-case 
-	  (format nil (eval (read-from-string sexp)))
-	(t (e) (format nil "ERROR! in (format (eval (read))): ~a" e)))))
