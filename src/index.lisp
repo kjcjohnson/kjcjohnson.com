@@ -67,7 +67,7 @@ TODO: cleanup code."
 	(:body
 	 (:div :id "wrapper"
 	       (:div :id "header"
-		     ,(if (null user-name) () `(:p "Welcome, " ,user-name))
+		     (:div :id "userinfo" ,(if (null user-name) () `(:p "Welcome, " ,user-name)))
 		     ,@header)
 	       (:div :id "navdiv"
 		     (:ul :class "nav"
