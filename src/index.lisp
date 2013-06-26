@@ -62,11 +62,11 @@ TODO: cleanup code."
 	 (:script :language "javascript" :type "text/javascript"
 		  ,(if (null user-name)
 		  "function loginRedirect() {
-                      window.location = #\"/login?fromp=#\"+window.document.URL;
+                      window.location = '/login?fromp='+window.document.URL;
                    }"
 
                    "function logoutRedirect() {
-                      window.location = #\"/logout?fromp=#\"+window.document.URL;
+                      window.location = '/logout?fromp='+window.document.URL;
                    }"))    
                       
 	 ,(if jquery
