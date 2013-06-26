@@ -97,7 +97,7 @@ TODO: cleanup code."
 		       (:a :href "http://weitz.de/hunchentoot/" :class "subtle-link" "Hunchentoot") ".")
 		     (:image :src "/static/lisplogo_alien.png")))
 	 (:script :language "javascript" :type "text/javascript"
-		  "$( '#login-link' ).onclick=" ,(if (null user-name) "loginRedirect()" "logoutRedirect()"))))))
+		  "$( '#login-link' ).on( 'click', " ,(if (null user-name) "loginRedirect()" "logoutRedirect()")");")))))
 
 
 (hunchentoot:define-easy-handler (index :uri "/") ()
