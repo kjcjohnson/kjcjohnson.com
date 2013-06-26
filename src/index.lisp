@@ -125,6 +125,7 @@ TODO: cleanup code."
 (hunchentoot:define-easy-handler (blank-page :uri "/blank") ()
 
   (create-typical-page
+   :jquery t
    :user-name "kjcjohnson"
    :content ((:p))))
 
