@@ -42,7 +42,7 @@ TODO: cleanup code."
 (defun add-menu-item (location name)
   (let ((revmenu (nreverse kjcjohnson-site::*menu-items*)))
     (push (cons location name) revmenu)
-    (setf kjcjohnson-site::*menu-items* revmenu)))
+    (setf kjcjohnson-site::*menu-items* (nreverse revmenu))))
 
 (add-menu-item "/" "Home" )
 (add-menu-item "/blank" "Blank Page" )
@@ -53,6 +53,7 @@ TODO: cleanup code."
 			            (header `((:h1 :id "header-title" ,title)))
 			            content
 			            footer
+			            user-name
 			            (jquery nil))
     		 
     `(cl-who:with-html-output-to-string (s)
@@ -66,6 +67,7 @@ TODO: cleanup code."
 	(:body
 	 (:div :id "wrapper"
 	       (:div :id "header"
+		     ,(if (null user-name) () `(:p "Welcome, " ,username))
 		     ,@header)
 	       (:div :id "navdiv"
 		     (:ul :class "nav"
@@ -106,6 +108,7 @@ TODO: cleanup code."
 (hunchentoot:define-easy-handler (blank-page :uri "/blank") ()
 
   (create-typical-page
+   :user-name "kjcjohnson"
    :content ((:p))))
 
 (hunchentoot:define-easy-handler (spec-data :uri "/specdata") ()
