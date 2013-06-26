@@ -59,6 +59,16 @@ TODO: cleanup code."
     `(cl-who:with-html-output-to-string (s)
        (:html
 	(:head
+	 (:script :language "javascript" :type "text/javascript"
+		  ,(if (null user-name)
+		  "function loginRedirect() {
+                      window.location = #\"/login?fromp=#\"+window.document.URL;
+                   }"
+
+                   "function logoutRedirect() {
+                      window.location = #\"/logout?fromp=#\"+window.document.URL;
+                   }"))    
+                      
 	 ,(if jquery
 	    `(:script :src "http://code.jquery.com/jquery-1.9.1.js"))
 	 (:title ,title)
@@ -67,7 +77,9 @@ TODO: cleanup code."
 	(:body
 	 (:div :id "wrapper"
 	       (:div :id "header"
-		     (:div :id "userinfo" ,(if (null user-name) () `(:p "Welcome, " ,user-name)))
+		     (:div :id "userinfo" ,(if (null user-name) 
+					       '(:a "Login" :id "login-link") 
+					       `(:p "Welcome, " ,user-name)))
 		     ,@header)
 	       (:div :id "navdiv"
 		     (:ul :class "nav"
@@ -79,8 +91,13 @@ TODO: cleanup code."
 	       (:div :id "footer"
 		     (:hr :id "footer-top")
 		     ,@footer
-		     (:p "kjcjohnson.com made proudly with Common Lisp, SBCL, and Hunchentoot.")
-		     (:image :src "/static/lisplogo_alien.png")))))))
+		     (:p "kjcjohnson.com made proudly with" 
+                       (:a "Common Lisp" :href "common-lisp.net" :class "subtle-link") ", "
+		       (:a "SBCL" :href "www.sbcl.org/" :class "subtle-link") ", and "
+		       (:a "Hunchentoot" :href "weitz.de/hunchentoot/" :class "subtle-link") ".")
+		     (:image :src "/static/lisplogo_alien.png")))
+	 (:script :language "javascript" :type "text/javascript"
+		  "$( '#login-link' ).onClick(" ,(if (null user-name) "loginRedirect()" "logoutRedirect()"))))))
 
 
 (hunchentoot:define-easy-handler (index :uri "/") ()
@@ -110,6 +127,12 @@ TODO: cleanup code."
   (create-typical-page
    :user-name "kjcjohnson"
    :content ((:p))))
+
+(hunchentoot:define-easy-handler (login :uri "/login") (fromp)
+
+  (create-typical-page
+   :title "Login Page"
+   :content ((:p "This is a login page! fromp is " fromp))))
 
 (hunchentoot:define-easy-handler (spec-data :uri "/specdata") ()
 
