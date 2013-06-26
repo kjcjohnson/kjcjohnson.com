@@ -78,8 +78,8 @@ TODO: cleanup code."
 	 (:div :id "wrapper"
 	       (:div :id "header"
 		     (:div :id "userinfo" ,(if (null user-name) 
-					       '(:a "Login" :id "login-link") 
-					       `(:p "Welcome, " ,user-name)))
+					       '(:a :id "login-link" "Login") 
+					       `(:p "Welcome, " (:a :id "login-link" ,user-name))))
 		     ,@header)
 	       (:div :id "navdiv"
 		     (:ul :class "nav"
@@ -92,12 +92,12 @@ TODO: cleanup code."
 		     (:hr :id "footer-top")
 		     ,@footer
 		     (:p "kjcjohnson.com made proudly with" 
-                       (:a "Common Lisp" :href "common-lisp.net" :class "subtle-link") ", "
-		       (:a "SBCL" :href "www.sbcl.org/" :class "subtle-link") ", and "
-		       (:a "Hunchentoot" :href "weitz.de/hunchentoot/" :class "subtle-link") ".")
+                       (:a :href "common-lisp.net" :class "subtle-link" "Common Lisp") ", "
+		       (:a :href "www.sbcl.org/" :class "subtle-link" "SBCL") ", and "
+		       (:a :href "weitz.de/hunchentoot/" :class "subtle-link" "Hunchentoot") ".")
 		     (:image :src "/static/lisplogo_alien.png")))
 	 (:script :language "javascript" :type "text/javascript"
-		  "$( '#login-link' ).onClick(" ,(if (null user-name) "loginRedirect()" "logoutRedirect()"))))))
+		  "$( '#login-link' ).onclick=" ,(if (null user-name) "loginRedirect()" "logoutRedirect()"))))))
 
 
 (hunchentoot:define-easy-handler (index :uri "/") ()
