@@ -67,7 +67,7 @@ TODO: cleanup code."
 	(:body
 	 (:div :id "wrapper"
 	       (:div :id "header"
-		     ,(if (null user-name) () `(:p "Welcome, " ,username))
+		     ,(if (null user-name) () `(:p "Welcome, " ,user-name))
 		     ,@header)
 	       (:div :id "navdiv"
 		     (:ul :class "nav"
@@ -115,10 +115,7 @@ TODO: cleanup code."
 
   (create-typical-page
    :title "Astro 461 Spectroscopy Data"
-   :content ((:p "Here are the files from the three nights, in .zip archives.")
-	     (:ul (:li (:a :href "/461data/may10.zip" "May 10"))
-		  (:li (:a :href "/461data/may11.zip" "May 11"))
-		  (:li (:a :href "/461data/may12.zip" "May 12"))))))
+   :content ((:p "These files have been removed for space reasons. Please contact me at kjcjohnson@ymail.com for access."))))     
 
 
 (defparameter *ajax-processor*
