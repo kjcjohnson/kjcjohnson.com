@@ -54,7 +54,7 @@ TODO: cleanup code."
 			            content
 			            footer
 			            user-name
-			            (jquery nil))
+			            (jquery t))
     		 
     `(cl-who:with-html-output-to-string (s)
        (:html
@@ -91,13 +91,13 @@ TODO: cleanup code."
 	       (:div :id "footer"
 		     (:hr :id "footer-top")
 		     ,@footer
-		     (:p "kjcjohnson.com made proudly with" 
+		     (:p "kjcjohnson.com made proudly with " 
                        (:a :href "http://common-lisp.net" :class "subtle-link" "Common Lisp") ", "
 		       (:a :href "http://www.sbcl.org/" :class "subtle-link" "SBCL") ", and "
 		       (:a :href "http://weitz.de/hunchentoot/" :class "subtle-link" "Hunchentoot") ".")
 		     (:image :src "/static/lisplogo_alien.png")))
 	 (:script :language "javascript" :type "text/javascript"
-		  "$( '#login-link' ).on( 'click', " ,(if (null user-name) "loginRedirect()" "logoutRedirect()")");")))))
+		  "$( '#login-link' ).on( 'click', function(e) {" ,(if (null user-name) "loginRedirect()" "logoutRedirect()")"});")))))
 
 
 (hunchentoot:define-easy-handler (index :uri "/") ()
