@@ -139,9 +139,9 @@ TODO: cleanup code."
 	     (:button :type "button" :id "login-submit-button" "Login")
 	     (:script :language "javascript" :type "text/javascript"
 		      "$( '#login-submit-button' ).on( 'click', function(e) {
-                          $.get( '/loginbackend', { username: $( '#username-field' ).val(),
+                          $.get( '/loginbackend', { username: $( '#username-field' ).val() },
                                                      function(msg) {
-                                                        $( '#output' ).text() = msg; }})});"))))
+                                                        $( '#output' ).text() = msg; })});"))))
 
                          
 
