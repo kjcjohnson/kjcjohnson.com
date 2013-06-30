@@ -162,9 +162,10 @@ TODO: cleanup code."
   (make-instance 'ht-simple-ajax:ajax-processor :server-uri "/repl/process"))
 
 (hunchentoot:define-easy-handler (loginbackend :uri "/loginbackend") (username)
-  (start-session)
-  (setf (session-value :username) username)
-  "Login Successful.")
+  (handler-case (progn (start-session)
+		       (setf (session-value :username) username)
+		       (cl-who:with-html-output-to-string (s) (cl-who:str "Login Successful.")))
+    (condition (c) (cl-who:with-html-output-to-string (s) (format s "~a" c)))))
 
 (ht-simple-ajax:defun-ajax repl-response (sexp) (*ajax-processor*)
 			   (format nil "~a" (eval (read-from-string sexp))))
