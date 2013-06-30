@@ -56,7 +56,7 @@ TODO: cleanup code."
 			            (user-name)
 			            (jquery t))
     		 
-    (if (null user-name) (setf user-name (hunchentoot:session-value :username)))
+    
     `(cl-who:with-html-output-to-string (s)
        (:html
 	(:head
@@ -105,6 +105,7 @@ TODO: cleanup code."
 
   (create-typical-page
    :title "Keith Johnson"
+   :username (hunchentoot:session-value :username)
    :content ((:p "This website is mainly used for PaaS backend and other web-based endeavours. "
 		 "Additionally, I also use it for sharing interesting code and files. "
 		 "Currently, there are a set of convience scripts for installing IRAF on "
@@ -127,7 +128,7 @@ TODO: cleanup code."
 
   (create-typical-page
    :jquery t
-   :user-name "kjcjohnson"
+   :user-name (hunchentoot:session-value :username)
    :content ((:p))))
 
 (hunchentoot:define-easy-handler (login :uri "/login") (fromp)
