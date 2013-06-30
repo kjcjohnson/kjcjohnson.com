@@ -53,7 +53,7 @@ TODO: cleanup code."
 			            (header `((:h1 :id "header-title" ,title)))
 			            content
 			            footer
-			            user-name
+			            (user-name (hunchentoot:session-value :username))
 			            (jquery t))
     		 
     `(cl-who:with-html-output-to-string (s)
@@ -162,8 +162,8 @@ TODO: cleanup code."
   (make-instance 'ht-simple-ajax:ajax-processor :server-uri "/repl/process"))
 
 (hunchentoot:define-easy-handler (loginbackend :uri "/loginbackend") (username)
-  (handler-case (progn (start-session)
-		       (setf (session-value :username) username)
+  (handler-case (progn (hunchentoot:start-session)
+		       (setf (hunchentoot:session-value :username) username)
 		       (cl-who:with-html-output-to-string (s) (cl-who:str "Login Successful.")))
     (condition (c) (cl-who:with-html-output-to-string (s) (format s "~a" c)))))
 
