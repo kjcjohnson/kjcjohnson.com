@@ -161,10 +161,10 @@ TODO: cleanup code."
 (defparameter *ajax-processor*
   (make-instance 'ht-simple-ajax:ajax-processor :server-uri "/repl/process"))
 
-(ht-simple-ajax:defun-ajax loginbackend (username) (*ajax-processor*)
-			   (start-session)
-			   (setf (session-value :username) username)
-			   "Login Successful.")
+(hunchentoot:define-easy-handler (loginbackend :uri "/loginbackend") (username)
+  (start-session)
+  (setf (session-value :username) username)
+  "Login Successful.")
 
 (ht-simple-ajax:defun-ajax repl-response (sexp) (*ajax-processor*)
 			   (format nil "~a" (eval (read-from-string sexp))))
