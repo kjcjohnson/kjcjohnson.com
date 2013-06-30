@@ -105,7 +105,7 @@ TODO: cleanup code."
 
   (create-typical-page
    :title "Keith Johnson"
-   :username (hunchentoot:session-value :username)
+   :user-name (hunchentoot:session-value :username)
    :content ((:p "This website is mainly used for PaaS backend and other web-based endeavours. "
 		 "Additionally, I also use it for sharing interesting code and files. "
 		 "Currently, there are a set of convience scripts for installing IRAF on "
