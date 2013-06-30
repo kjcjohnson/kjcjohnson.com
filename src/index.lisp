@@ -141,7 +141,7 @@ TODO: cleanup code."
 		      "$( '#login-submit-button' ).on( 'click', function(e) {
                           $.get( '/loginbackend', { username: $( '#username-field' ).val()
                                                      function(msg) {
-                                                        $( '#output' ).text() = msg; }); };"))))
+                                                        $( '#output' ).text() = msg; }})});"))))
 
                          
 
