@@ -53,7 +53,7 @@ TODO: cleanup code."
 			            (header `((:h1 :id "header-title" ,title)))
 			            content
 			            footer
-			            user-name
+			            (user-name `(hunchentoot:session-value :username)) 
 			            (jquery t))
     		 
     
@@ -78,7 +78,7 @@ TODO: cleanup code."
 	(:body
 	 (:div :id "wrapper"
 	       (:div :id "header"
-		     (:div :id "userinfo" ,(if (or (null user-name) (string= "" user-name))
+		     (:div :id "userinfo" ,(if (null user-name)
 					       '(:p :id "login-link" "Login") 
 					       `(:p "Welcome, " (:p :id "login-link" ,user-name))))
 		     ,@header)
@@ -98,8 +98,16 @@ TODO: cleanup code."
 		       (:a :href "http://weitz.de/hunchentoot/" :class "subtle-link" "Hunchentoot") ".")
 		     (:image :src "/static/lisplogo_alien.png")))
 	 (:script :language "javascript" :type "text/javascript"
-		  "$( '#login-link' ).on( 'click', function(e) {" ,(if (or (null user-name) (string= "" user-name)) "loginRedirect()" "logoutRedirect()")"});")))))
+		  "$( '#login-link' ).on( 'click', function(e) {" ,(if (null user-name) "loginRedirect()" "logoutRedirect()")"});")))))
 
+(defmacro create-typical-session-page (&key 
+				       title
+				       head
+				       header 
+				       content
+				       footer
+				       user-name
+				       (jquery t)))
 
 (hunchentoot:define-easy-handler (index :uri "/") ()
 
