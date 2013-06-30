@@ -53,9 +53,10 @@ TODO: cleanup code."
 			            (header `((:h1 :id "header-title" ,title)))
 			            content
 			            footer
-			            (user-name (hunchentoot:session-value :username))
+			            (user-name)
 			            (jquery t))
     		 
+    (if (null user-name) (setf user-name (hunchentoot:session-value :username)))
     `(cl-who:with-html-output-to-string (s)
        (:html
 	(:head
@@ -141,12 +142,13 @@ TODO: cleanup code."
 		      "$( '#login-submit-button' ).on( 'click', function(e) {
                           $.get( '/loginbackend', { username: $( '#username-field' ).val() },
                                                      function(msg) {
-                                                        $( '#output' ).text() = msg; })});"))))
+                                                        $( '#output' ).html( msg ); })});"))))
 
                          
 
 (hunchentoot:define-easy-handler (logout :uri "/logout") (fromp)
 
+  (hunchentoot:reset-sessions)
   (create-typical-page
    :title "Logout"
    :content ((:p "This is the logout page!"))))
