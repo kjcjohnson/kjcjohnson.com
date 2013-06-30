@@ -132,8 +132,24 @@ TODO: cleanup code."
 (hunchentoot:define-easy-handler (login :uri "/login") (fromp)
 
   (create-typical-page
-   :title "Login Page"
-   :content ((:p "This is a login page! fromp is " fromp))))
+   :title "Login"
+   :content ((:p "This is a login page! fromp is " (cl-who:str fromp))
+	     (:input :type "text" :id "username-field" :value "Username")
+	     (:p :id "output")
+	     (:button :type "button" :id "login-submit-button" "Login")
+	     (:script :language "javascript" :type "text/javascript"
+		      "$( '#login-submit-button' ).on( 'click', function(e) {
+                          $.post( '/loginbackend', { username: $( '#username-field' ).val()
+                                                     function(msg) {
+                                                        $( '#output' ).text() = msg; }); };"))))
+
+                         
+
+(hunchentoot:define-easy-handler (logout :uri "/logout") (fromp)
+
+  (create-typical-page
+   :title "Logout"
+   :content ((:p "This is the logout page!"))))
 
 (hunchentoot:define-easy-handler (spec-data :uri "/specdata") ()
 
@@ -145,8 +161,13 @@ TODO: cleanup code."
 (defparameter *ajax-processor*
   (make-instance 'ht-simple-ajax:ajax-processor :server-uri "/repl/process"))
 
+(ht-simple-ajax:defun-ajax loginbackend (username) (*ajax-processor*)
+			   (start-session)
+			   (setf (session-value :username) username)
+			   "Login Successful.")
+
 (ht-simple-ajax:defun-ajax repl-response (sexp) (*ajax-processor*)
-  (format nil "~a" (eval (read-from-string sexp))))
+			   (format nil "~a" (eval (read-from-string sexp))))
 
 (push (ht-simple-ajax:create-ajax-dispatcher *ajax-processor*) hunchentoot:*dispatch-table*) 
 
