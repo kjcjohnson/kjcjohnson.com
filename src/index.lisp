@@ -100,14 +100,6 @@ TODO: cleanup code."
 	 (:script :language "javascript" :type "text/javascript"
 		  "$( '#login-link' ).on( 'click', function(e) {" ,(if (null user-name) "loginRedirect()" "logoutRedirect()")"});")))))
 
-(defmacro create-typical-session-page (&key 
-				       title
-				       head
-				       header 
-				       content
-				       footer
-				       user-name
-				       (jquery t)))
 
 (hunchentoot:define-easy-handler (index :uri "/") ()
 
@@ -176,7 +168,12 @@ TODO: cleanup code."
   (handler-case (progn (hunchentoot:start-session)
 		       (setf (hunchentoot:session-value :username) username)
 		       (cl-who:with-html-output-to-string (s) (cl-who:str "Login Successful.")))
-    (condition (c) (cl-who:with-html-output-to-string (s) (format s "~a" c)))))
+    (error (c) (cl-who:with-html-output-to-string (s) (format s "~a" c)))))
+
+(hunchentoot:define-easy-handler (sessionmanager :uri "/sessionmanager") (command)
+  (cond ((string= command "get-username") (if (null (nth-value 1 (hunchentoot:session-value :username))) ""
+					      (hunchentoot:session-value :username)))
+	(t "unknown")))
 
 (ht-simple-ajax:defun-ajax repl-response (sexp) (*ajax-processor*)
 			   (format nil "~a" (eval (read-from-string sexp))))
