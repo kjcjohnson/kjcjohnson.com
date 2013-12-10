@@ -36,6 +36,9 @@ TODO: cleanup code."
 (push (hunchentoot:create-folder-dispatcher-and-handler "/461data/"
       (concatenate 'string (heroku-slug-dir) "/public/461data/")) hunchentoot:*dispatch-table*)
 
+(push (hunchentoot:create-folder-dispatcher-and-handler "/music/"
+      (concatenate 'string (heroku-slug-dir) "/public/music/")) hunchentoot:*dispatch-table*)
+
 
 (defparameter kjcjohnson-site::*menu-items* nil)
 (setf hunchentoot:*show-lisp-backtraces-p* t)
