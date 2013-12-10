@@ -38,6 +38,7 @@ TODO: cleanup code."
 
 
 (defparameter kjcjohnson-site::*menu-items* nil)
+(setf hunchentoot:*show-lisp-backtraces-p* t)
 
 (defun add-menu-item (location name)
   (let ((revmenu (nreverse kjcjohnson-site::*menu-items*)))
@@ -47,6 +48,18 @@ TODO: cleanup code."
 (add-menu-item "/" "Home" )
 (add-menu-item "/blank" "Blank Page" )
 (add-menu-item "/iraf" "IRAF Tools" )
+(add-menu-item "/music" "Music")
+
+(defmacro defjsfun (name arglist &rest body)
+
+  `(defmacro ,(intern (format nil "jsfunc-~a" name)) ,(cons 'stream arglist)
+     `(cl-who:with-html-output ,(list stream)
+	(:script :language "javascript" :type "text/javascript" 
+		 ,(format nil "function ~a {" ,name)
+		 ,@(loop for el in ,body collecting
+		     (symbol-name el))
+		 "}"))))
+									
 
 (defmacro create-typical-page (&key (title "Keith Johnson")
 			            head
@@ -71,7 +84,7 @@ TODO: cleanup code."
                    }"))    
                       
 	 ,(if jquery
-	    `(:script :src "http://code.jquery.com/jquery-1.9.1.js"))
+	    `(:script :src "http://code.jquery.com/jquery-1.9.1.min.js"))
 	 (:title ,title)
 	 (:link :rel "stylesheet" :href "/static/default-style.css")
 	 ,@head)
@@ -112,6 +125,14 @@ TODO: cleanup code."
 		 "x86 linux machines available. Hopefully, this site will be populated with "
 		 "more front-end content soon."))))
 
+(hunchentoot:define-easy-handler (music :uri "/music") ()
+
+  (create-typical-page
+   :title "Some Music of Mine"
+   :content ((:p "These are a couple of pieces I wrote for U-M MusPerf 300, Video Game Music.")
+	     (:ul :class "musicbullets"
+		  (:li (:a :href "/music/waltz_themed.mp3" "Waltz Theme"))
+		  (:li (:a :href "/music/walkinga.mp3"     "Walking Theme"))))))
 
 (hunchentoot:define-easy-handler (iraf :uri "/iraf") ()
 
