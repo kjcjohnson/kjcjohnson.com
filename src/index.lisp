@@ -10,7 +10,7 @@
   #+sbcl (sb-posix:getenv target))
 
 (defun heroku-slug-dir ()
-  (heroku-getenv "HOME"))
+  "/home/keith/kjcjohnson.com/kjcjohnson-site/")
 
 (defun db-params ()
   "Heroku database url format is postgres://username:password@host:port/database_name.
@@ -211,17 +211,13 @@ TODO: cleanup code."
    :title "REPL for kjcjohnson.com"
    :head ((:script "function processREPL() {
 
-                         ajax_repl_response( $('#REPL').val(),
-                                 function( respn ) {
-                                   text = $('#REPLHistory').val()
-                                   $('#REPLHistory').val(text + respn)
-                                 });
+                         
 
                      };")
 	  (cl-who:str (format nil "~a" (ht-simple-ajax:generate-prologue *ajax-processor*)))
 	  (:link :rel "stylesheet" :href "/static/REPL.css"))
    
-   :content ((:p "Use this lisp REPL to change the website in real time!")
+   :content ((:p "Use this lisp REPL to change the website in real time! (LOL no)")
 	     (:form
 	      (:textarea :id "REPLHistory")
 	      (:input :id "REPL")
