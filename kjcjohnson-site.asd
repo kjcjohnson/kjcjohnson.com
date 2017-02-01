@@ -3,7 +3,8 @@
   :description "A website devoted to Keith Johnson"
   :depends-on (#:hunchentoot
 	       #:cl-who
-	       #:postmodern)
+	       #:postmodern
+               #:ht-simple-ajax)
   :components ((:file "package")
 	       (:module :src
 			:serial t      
