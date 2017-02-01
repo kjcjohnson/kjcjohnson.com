@@ -7,5 +7,7 @@
   :components ((:file "package")
 	       (:module :src
 			:serial t      
-			:components ((:file "index")))))
+			:components ((:file "routes")
+                                     (:file "template")
+                                     (:file "index")))))
 

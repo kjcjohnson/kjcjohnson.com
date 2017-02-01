@@ -2,8 +2,6 @@
 
 (asdf:oos 'asdf:load-op :ht-simple-ajax)
 
-(load "routes.lisp")
-(load "template.lisp")
 
 ;; Handlers
 
