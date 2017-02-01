@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-mv /tmp/cache /tmp/was-cache 
-export PORT=3000
-/tmp/build/lispapp
-
