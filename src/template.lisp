@@ -28,14 +28,14 @@
        (:html
 	(:head
 	 (:script :language "javascript" :type "text/javascript"
-		  ,(if (null user-name)
-		  "function loginRedirect() {
+		  (if (null ,user-name)
+		  (cl-who:htm "function loginRedirect() {
                       window.location = '/login?fromp='+window.document.URL;
-                   }"
+                   }")
 
-                   "function logoutRedirect() {
+                   (cl-who:htm "function logoutRedirect() {
                       window.location = '/logout?fromp='+window.document.URL;
-                   }"))    
+                   }"))) 
                       
 	 ,(if jquery
 	    `(:script :src "https://code.jquery.com/jquery-1.9.1.min.js"))
@@ -65,4 +65,5 @@
 		       (:a :href "http://weitz.de/hunchentoot/" :class "subtle-link" "Hunchentoot") ".")
 		     (:image :src "/static/lisplogo_alien.png")))
 	 (:script :language "javascript" :type "text/javascript"
-		  "$( '#login-link' ).on( 'click', function(e) {" (if (null ,user-name) "loginRedirect()" "logoutRedirect()")"});")))))
+		  "$( '#login-link' ).on( 'click', function(e) {" 
+                  (if (null ,user-name) (cl-who:htm "loginRedirect()") (cl-who:htm "logoutRedirect()"))"});")))))
