@@ -47,7 +47,7 @@
 	       (:div :id "header"
 		     (:div :id "userinfo" (if (null ,user-name)
 					       (cl-who:htm (:p :id "login-link" "Login")) 
-					       (cl-who:htm (:p "Welcome, " (:p :id "login-link" ,user-name)))))
+					       (cl-who:htm (:p "Welcome, " (:p :id "login-link" (cl-who:str ,user-name))))))
 		     ,@header)
 	       (:div :id "navdiv"
 		     (:ul :class "nav"
