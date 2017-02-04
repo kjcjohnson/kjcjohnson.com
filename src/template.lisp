@@ -38,7 +38,7 @@
                    }"))    
                       
 	 ,(if jquery
-	    `(:script :src "http://code.jquery.com/jquery-1.9.1.min.js"))
+	    `(:script :src "https://code.jquery.com/jquery-1.9.1.min.js"))
 	 (:title ,title)
 	 (:link :rel "stylesheet" :href "/static/default-style.css")
 	 ,@head)
