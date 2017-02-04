@@ -45,14 +45,14 @@
 	(:body
 	 (:div :id "wrapper"
 	       (:div :id "header"
-		     (:div :id "userinfo" ,(if (null user-name)
-					       '(:p :id "login-link" "Login") 
-					       `(:p "Welcome, " (:p :id "login-link" ,user-name))))
+		     (:div :id "userinfo" (if (null ,user-name)
+					       (cl-who:htm (:p :id "login-link" "Login")) 
+					       (cl-who:htm (:p "Welcome, " (:p :id "login-link" ,user-name)))))
 		     ,@header)
 	       (:div :id "navdiv"
 		     (:ul :class "nav"
-			 (loop for ( place .  name ) in *menu-items* doing
-			      (cl-who:htm (:li (:a :href place (cl-who:str name)))))))
+                          (loop for ( place .  name ) in *menu-items* doing
+                               (cl-who:htm (:li (:a :href place (cl-who:str name)))))))
 	       
 	       (:div :id "content"
 		     ,@content)
