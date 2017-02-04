@@ -65,4 +65,4 @@
 		       (:a :href "http://weitz.de/hunchentoot/" :class "subtle-link" "Hunchentoot") ".")
 		     (:image :src "/static/lisplogo_alien.png")))
 	 (:script :language "javascript" :type "text/javascript"
-		  "$( '#login-link' ).on( 'click', function(e) {" ,(if (null user-name) "loginRedirect()" "logoutRedirect()")"});")))))
+		  "$( '#login-link' ).on( 'click', function(e) {" (if (null ,user-name) "loginRedirect()" "logoutRedirect()")"});")))))
