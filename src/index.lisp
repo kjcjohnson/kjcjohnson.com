@@ -21,6 +21,7 @@
 
 
 (hunchentoot:define-easy-handler (index :uri "/") ()
+  
 
   (create-typical-page
    :title "Keith Johnson"

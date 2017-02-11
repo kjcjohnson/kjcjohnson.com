@@ -20,3 +20,4 @@
 
 (push (hunchentoot:create-folder-dispatcher-and-handler "/music/"
       (concatenate 'string (site-root) "/public/music/")) hunchentoot:*dispatch-table*)
+

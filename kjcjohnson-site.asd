@@ -10,5 +10,6 @@
 			:serial t      
 			:components ((:file "routes")
                                      (:file "template")
+                                     (:file "heartbeat")
                                      (:file "index")))))
 
