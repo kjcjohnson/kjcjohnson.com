@@ -1,1 +1,15 @@
-sbcl --dynamic-space-size 128 --load "start-server.lisp"
+#!/bin/bash 
+
+if [ ! -f environment ]; then
+    echo
+    echo "Could not find an environment file."
+    echo 
+    echo "Please create a file 'environment' with the environment definition."
+    echo "  See 'environment.sample' for a sample environment."
+    echo
+    exit 2
+fi
+
+source environment
+
+sbcl --dynamic-space-size 256 --load "start-server.lisp"

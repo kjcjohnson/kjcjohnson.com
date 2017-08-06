@@ -1,10 +1,15 @@
+
+;; Check if quicklisp is available. If not, load the file
+#-quicklisp (load "quicklisp.lisp")
+
 (ql:quickload :hunchentoot)
 (ql:quickload :ht-simple-ajax)
 (ql:quickload :postmodern)
+(ql:quickload :uiop)
+(ql:quickload :cl-ppcre)
 
 (load "kjcjohnson-site.asd")
 
 (ql:quickload :kjcjohnson-site)
 
-(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 8080 ))
-
+(kjcjohnson-site:start :port 8080)

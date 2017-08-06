@@ -4,8 +4,15 @@
   :depends-on (#:hunchentoot
 	       #:cl-who
 	       #:postmodern
-               #:ht-simple-ajax)
+               #:ht-simple-ajax
+               #:uiop
+               #:cl-ppcre)
   :components ((:file "package")
+               (:module :framework
+                        :serial t
+                        :components ((:file "utility")
+                                     (:file "environment")))
+               (:file "setup")
 	       (:module :src
 			:serial t      
 			:components ((:file "routes")

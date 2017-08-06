@@ -4,7 +4,7 @@
 (in-package :kjcjohnson-site)
 
 
-(defmacro site-root () "/home/keith/kjcjohnson.com/kjcjohnson-site")
+(defun site-root () (envget :wwwroot))
 
 (push (hunchentoot:create-folder-dispatcher-and-handler "/static/" 
       (concatenate 'string (site-root) "/public/")) hunchentoot:*dispatch-table*)

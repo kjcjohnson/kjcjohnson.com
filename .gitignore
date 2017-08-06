@@ -1,4 +1,7 @@
 # we want to ignore .fasl files and temp files.#
 ################################################
 *.fasl
-*.*~
+*~
+
+# Ignore the environment file - location-specific
+environment

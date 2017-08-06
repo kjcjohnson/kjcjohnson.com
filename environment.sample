@@ -1,0 +1,6 @@
+#  -*- sh -*-
+#
+
+# Environment definition for kjcjohnson-site
+
+export KJCJOHNSON_SITE_WWWROOT="/home/keith/kjcjohnson.com/kjcjohnson-site"

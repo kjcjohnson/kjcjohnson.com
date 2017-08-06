@@ -1,4 +1,5 @@
 ;;;; package.lisp
 
 (defpackage #:kjcjohnson-site
-  (:use #:cl))
+  (:use #:cl)
+  (:export :start))
