@@ -5,7 +5,8 @@
 
 (defun setup-environment ()
   (format t "Setting up environment...~%")
-  (envadd :wwwroot))
+  (envadd :wwwroot)
+  (envadd :fragment-directory))
 
 (setup-environment)
 
