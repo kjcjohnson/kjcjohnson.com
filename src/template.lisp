@@ -24,7 +24,7 @@
 			            (jquery t))
     		 
     
-    `(cl-who:with-html-output-to-string (s)
+    `(cl-who:with-html-output-to-string (s nil :prologue t :indent t)					
        (:html
 	(:head
 	 (:script :language "javascript" :type "text/javascript"
@@ -56,14 +56,15 @@
 	       
 	       (:div :id "content"
 		     ,@content)
-	       (:div :id "footer"
-		     (:hr :id "footer-top")
-		     ,@footer
-		     (:p "kjcjohnson.com made proudly with " 
-                       (:a :href "http://common-lisp.net" :class "subtle-link" "Common Lisp") ", "
-		       (:a :href "http://www.sbcl.org/" :class "subtle-link" "SBCL") ", and "
-		       (:a :href "http://weitz.de/hunchentoot/" :class "subtle-link" "Hunchentoot") ".")
-		     (:image :src "/static/lisplogo_alien.png")))
+               (:div :class "push"))
+         (:footer :id "footer"
+                  (:hr :id "footer-top")
+                  ,@footer
+                  (:p "kjcjohnson.com made proudly with " 
+                      (:a :href "http://common-lisp.net" :class "subtle-link" "Common Lisp") ", "
+                      (:a :href "http://www.sbcl.org/" :class "subtle-link" "SBCL") ", and "
+                      (:a :href "http://weitz.de/hunchentoot/" :class "subtle-link" "Hunchentoot") ".")
+                  (:img :src "/static/lisplogo_alien.png"))
 	 (:script :language "javascript" :type "text/javascript"
 		  "$( '#login-link' ).on( 'click', function(e) {" 
                   (if (null ,user-name) (cl-who:htm "loginRedirect()") (cl-who:htm "logoutRedirect()"))"});")))))

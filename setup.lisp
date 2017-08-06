@@ -8,3 +8,5 @@
   (envadd :wwwroot))
 
 (setup-environment)
+
+(setf (cl-who:html-mode) :HTML5)

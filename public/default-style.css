@@ -7,6 +7,11 @@
 
 }
 
+html {
+    height: 100%;
+    margin: 0;
+}
+
 #userinfo {
 
     float: right;
@@ -50,16 +55,20 @@ body {
 
     background-image: url("paper_fibers.png");
     background-repeat: repeat;
-
+    height: 100%;
 }
 
 #footer {
 
     font-size: 70%;
-    height: 80px;
-    
-    
+    height: 80px;    
+    margin: 0 auto;
+    width: 960px;
+    padding: 10px 20px;
+}
 
+.push {
+    height: 80px;
 }
 
 #wrapper {
@@ -68,7 +77,11 @@ body {
     margin-top: 10px;
     width: 960px;
     padding: 10px;
-
+    
+    padding-bottom: 20px;
+    padding-top: 20px;
+    min-height: 90%;
+    margin: 0 auto -90px;
 }
 
 #content {
@@ -76,7 +89,6 @@ body {
     margin: 5px;
     padding-right: 10px;
     padding-left: 10px;
-    height: 70%;
 
 }
 
