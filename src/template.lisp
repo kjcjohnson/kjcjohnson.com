@@ -51,8 +51,8 @@
 		     ,@header)
 	       (:div :id "navdiv"
 		     (:ul :class "nav"
-                          (loop for ( place .  name ) in *menu-items* doing
-                               (cl-who:htm (:li (:a :href place (cl-who:str name)))))))
+                          (with-menu-items (place name)
+                            (cl-who:htm (:li (:a :href place (cl-who:str name)))))))
 	       
 	       (:div :id "content"
 		     ,@content)

@@ -11,11 +11,13 @@
                (:module :framework
                         :serial t
                         :components ((:file "utility")
-                                     (:file "environment")))
+                                     (:file "environment")
+                                     (:file "menu")))
                (:file "setup")
 	       (:module :src
 			:serial t      
-			:components ((:file "routes")
+			:components ((:file "menu")
+                                     (:file "routes")
                                      (:file "template")
                                      (:file "heartbeat")
                                      (:file "index")))))

@@ -5,20 +5,7 @@
 
 ;; Handlers
 
-
-(defparameter kjcjohnson-site::*menu-items* nil)
 (setf hunchentoot:*show-lisp-backtraces-p* t)
-
-(defun add-menu-item (location name)
-  (let ((revmenu (nreverse kjcjohnson-site::*menu-items*)))
-    (push (cons location name) revmenu)
-    (setf kjcjohnson-site::*menu-items* (nreverse revmenu))))
-
-(add-menu-item "/" "Home" )
-(add-menu-item "/blank" "Blank Page" )
-(add-menu-item "/iraf" "IRAF Tools" )
-(add-menu-item "/music" "Music")
-
 
 (hunchentoot:define-easy-handler (index :uri "/") ()
   
