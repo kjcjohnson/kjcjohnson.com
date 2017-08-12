@@ -24,7 +24,7 @@
 			            (jquery t))
     		 
     
-    `(cl-who:with-html-output-to-string (s nil :prologue t :indent t)					
+    `(cl-who:with-html-output-to-string (s nil :prologue t)
        (:html
 	(:head
 	 (:script :language "javascript" :type "text/javascript"
@@ -60,10 +60,12 @@
          (:footer :id "footer"
                   (:hr :id "footer-top")
                   ,@footer
-                  (:p "kjcjohnson.com made proudly with " 
+                  (:p "www.kjcjohnson.com made proudly with "
                       (:a :href "http://common-lisp.net" :class "subtle-link" "Common Lisp") ", "
                       (:a :href "http://www.sbcl.org/" :class "subtle-link" "SBCL") ", and "
-                      (:a :href "http://weitz.de/hunchentoot/" :class "subtle-link" "Hunchentoot") ".")
+                      (:a :href "http://weitz.de/hunchentoot/" :class "subtle-link" "Hunchentoot") ". "
+                      "See this project on " (:a :href "https://github.com/kjcjohnson/kjcjohnson.com" :class "subtle-link" "Github") ". "
+                      "www.kjcjohnson.com is a strong believer in " (:a :href "www.yes-www.org" :class "subtle-link" "yes-www") ".")
                   (:img :src "/static/lisplogo_alien.png"))
 	 (:script :language "javascript" :type "text/javascript"
 		  "$( '#login-link' ).on( 'click', function(e) {" 
