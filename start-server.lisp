@@ -1,6 +1,7 @@
 
 ;; Check if quicklisp is available. If not, load the file
 #-quicklisp (load "quicklisp.lisp")
+#-quicklisp (quicklisp-quickstart:install)
 
 (ql:quickload :hunchentoot)
 (ql:quickload :ht-simple-ajax)

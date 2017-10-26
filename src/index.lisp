@@ -27,6 +27,7 @@
 	     (:ul :class "musicbullets"
 		  (:li (:a :href "/music/waltz_themed.mp3" "Waltz Theme"))
 		  (:li (:a :href "/music/walkinga.mp3"     "Walking Theme")))
+             (:hr)
              (:p "I recorded these with the SNsynth that I built.")
              (insert-fragment "cantina-band.frag")
              (insert-fragment "imperial-march.frag"))))
@@ -37,7 +38,10 @@
    :title "Keith's IRAF tools"
    :content ((:p "These are a collection of bash install scripts that ease "
 		"the install process of IRAF and x11IRAF on x86 linux systems. "
-		"Note: Run at your own risk.")
+		"Note: Run at your own risk. The author is not responsible for any damage that may occur.")
+             (:p (:em "These scripts were written in (and were useful in) 2013, but "
+                     "haven't been used or tested by the author since then. "
+                     "Whether or not they are still valid is unknown."))
 	     (:ul :class "irafitems"
 		  (:li (:a :href "/iraf/files/install_iraf" "install_iraf") ": Installs IRAF's dependencies")
 		  (:li (:a :href "/iraf/files/install_x11iraf" "install_x11iraf") ": Installs x11IRAF and ds9")))))
@@ -45,6 +49,7 @@
 (hunchentoot:define-easy-handler (blank-page :uri "/blank") ()
 
   (create-typical-page
+   :title "&nbsp;"
    :jquery t
    :user-name (hunchentoot:session-value :username)
    :content ((:p))))

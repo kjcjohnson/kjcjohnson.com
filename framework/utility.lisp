@@ -14,10 +14,22 @@
 ;;
 ;; Inserts the given view fragment in a cl-who block
 ;;
-(defmacro insert-fragment (pname)
+'(defmacro insert-fragment (pname)
   (let ((frag (gensym))
         (fstream (gensym)))
     `(with-open-file (,fstream (concatenate 'string (envget :fragment-directory) ,pname))
        (let ((,frag (make-string (file-length ,fstream))))
          (read-sequence ,frag ,fstream)
          (cl-who:str ,frag)))))
+
+(defmacro insert-fragment (pname)
+  (let ((frag (gensym))
+        (fstream (gensym))
+        (fragpath (gensym)))
+    `(let ((,fragpath (concatenate 'string (envget :fragment-directory) ,pname)))
+       (progn
+         (format t "Got frag path: ~a~%" ,fragpath) 
+         (with-open-file (,fstream ,fragpath)
+           (let ((,frag (make-string (file-length ,fstream))))
+             (read-sequence ,frag ,fstream)
+             (cl-who:str ,frag)))))))
