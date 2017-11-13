@@ -5,3 +5,7 @@
 
 # Ignore the environment file - location-specific
 environment
+
+# Ignore private folders
+private/
+public/private/

@@ -15,22 +15,9 @@
    :user-name (hunchentoot:session-value :username)
    :content ((:p "This website is mainly used for PaaS backend and other web-based endeavours. "
 		 "Additionally, I also use it for sharing interesting code and files. "
-		 "Currently, there are a set of convience scripts for installing IRAF on "
-		 "x86 linux machines available. Hopefully, this site will be populated with "
+		 "Currently, there is some music I have composed and recorded "
+		 "as well as some blank or mostly blank sections. Hopefully, this site will be populated with "
 		 "more front-end content soon."))))
-
-(hunchentoot:define-easy-handler (music :uri "/music") ()
-
-  (create-typical-page
-   :title "Some Music of Mine"
-   :content ((:p "These are a couple of pieces I wrote for U-M MusPerf 300, Video Game Music.")
-	     (:ul :class "musicbullets"
-		  (:li (:a :href "/music/waltz_themed.mp3" "Waltz Theme"))
-		  (:li (:a :href "/music/walkinga.mp3"     "Walking Theme")))
-             (:hr)
-             (:p "I recorded these with the SNsynth that I built.")
-             (insert-fragment "cantina-band.frag")
-             (insert-fragment "imperial-march.frag"))))
 
 (hunchentoot:define-easy-handler (iraf :uri "/iraf") ()
 

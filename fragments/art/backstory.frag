@@ -14,6 +14,7 @@ do that. But, there it was, hanging on the wall of an art gallery. And someone w
 of thousands of dollars for it&mdash;just a red square of canvas!
 </p>
 <p>
+Naturally, I was horrified by this. What did 
 </p>
 <p>
 You know, maybe the only purpose of the red square on the wall of the art gallery was to get people to think

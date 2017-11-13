@@ -5,6 +5,7 @@
   (create-typical-page
    :title "\"Art\" and Galleries"
    :content ((:p "Various \"artwork\" still under construction")
-             (:h3 "Backstory")
-             (insert-fragment "art/backstory.frag"))))
+             ;(:h3 "Backstory")
+             ;(insert-fragment "art/backstory.frag"))))
+)))
  

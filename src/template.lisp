@@ -3,6 +3,8 @@
 ;;
 (in-package :kjcjohnson-site)
 
+(defmacro b2link (path)
+  `(concatenate 'string (envget :b2-root) ,path))
 
 (defmacro defjsfun (name arglist &rest body)
 

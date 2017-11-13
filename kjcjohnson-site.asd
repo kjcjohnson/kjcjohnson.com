@@ -20,5 +20,8 @@
                                      (:file "routes")
                                      (:file "template")
                                      (:file "heartbeat")
-                                     (:file "index")))))
+                                     (:file "index")
+                                     (:file "projects")
+                                     (:file "cv")
+                                     (:file "art")))))
 
