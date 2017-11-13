@@ -23,5 +23,6 @@
                                      (:file "index")
                                      (:file "projects")
                                      (:file "cv")
+                                     (:file "music")
                                      (:file "art")))))
 
