@@ -139,3 +139,26 @@ p a.subtle-link {
     text-decoration: none;
 
 }
+
+p {
+
+    margin-bottom: 1em;
+
+}
+
+blockquote {
+
+    font-style: italic;
+    text-align: center;
+
+    margin-top: 1em;
+
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-left: 1em;
+    padding-right: 1em;
+
+    border-left-style: ridge;
+    border-left-width: medium;
+
+}
