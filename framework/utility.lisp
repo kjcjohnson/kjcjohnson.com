@@ -22,6 +22,10 @@
          (read-sequence ,frag ,fstream)
          (cl-who:str ,frag)))))
 
+(defun preprocess-fragment (frag)
+  (cl-ppcre:regex-replace-all "---" frag "&mdash;"))
+
+
 (defmacro insert-fragment (pname)
   (let ((frag (gensym))
         (fstream (gensym))
@@ -32,4 +36,5 @@
          (with-open-file (,fstream ,fragpath)
            (let ((,frag (make-string (file-length ,fstream))))
              (read-sequence ,frag ,fstream)
-             (cl-who:str ,frag)))))))
+             (cl-who:str (preprocess-fragment ,frag))))))))
+

@@ -17,7 +17,8 @@
 		 "Additionally, I also use it for sharing interesting code and files. "
 		 "Currently, there is some music I have composed and recorded "
 		 "as well as some blank or mostly blank sections. Hopefully, this site will be populated with "
-		 "more front-end content soon."))))
+		 "more front-end content soon.")
+             (insert-fragment "index/about.frag"))))
 
 (hunchentoot:define-easy-handler (iraf :uri "/iraf") ()
 
